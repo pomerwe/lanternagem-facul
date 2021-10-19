@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace lanternagem_api.Models
 {
   public class WorkOrderStatus
   {
+    [Key]
+    public long Id { get; set; }
     public DateTime StatusMoment { get; set; }
     public WorkOrderStatusEnum Status { get; set; }
 

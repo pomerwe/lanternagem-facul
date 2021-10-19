@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection.Metadata;
 
@@ -7,6 +8,8 @@ namespace lanternagem_api.Models
 {
   public class WorkOrder
   {
+    [Key]
+    public long Id { get; set; }
     public Customer Customer { get;set; }
     public Vehicle Vehicle { get; set; }
     public List<Blob> AccidentImages { get; set; }
