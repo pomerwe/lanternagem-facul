@@ -28,7 +28,7 @@ namespace lanternagem_api
     {
       services.AddControllers();
 
-      services.AddDbContext<LanternagemDbContext>(op => op.UseInMemoryDatabase("LanternagemDatabase"));
+      services.AddDbContext<InsuranceDbContext>(op => op.UseInMemoryDatabase("LanternagemDatabase"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

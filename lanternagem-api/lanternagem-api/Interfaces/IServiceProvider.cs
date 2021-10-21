@@ -12,6 +12,6 @@ namespace lanternagem_api.Interfaces
     Task<(bool IsSuccess, List<Service> Services , string ErrorMessage)> GetServices();
     Task<(bool IsSuccess, string ErrorMessage)> AddService(Service service);
     Task<(bool IsSuccess, string ErrorMessage)> UpdateService(Service service);
-    Task<(bool IsSuccess, string ErrorMessage)> DeleteService(Service service);
+    Task<(bool IsSuccess, string ErrorMessage)> DeleteService(int serviceId);
   }
 }

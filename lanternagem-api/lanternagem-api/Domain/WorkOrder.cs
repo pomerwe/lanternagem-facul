@@ -17,7 +17,6 @@ namespace lanternagem_api.Models
     public Service Service { get; set; }
     public List<WorkOrderStep> Steps { get; set; }
     public string Description { get; set; }
-
     public List<WorkOrderStatus> Status { get; set; }
 
     public WorkOrder(Customer customer, Vehicle vehicle, string description)
@@ -30,6 +29,7 @@ namespace lanternagem_api.Models
 
     public void BindService(Service service)
     {
+      Steps.Clear();
       Service = service;
       Service.Steps.ForEach(s => 
       {
