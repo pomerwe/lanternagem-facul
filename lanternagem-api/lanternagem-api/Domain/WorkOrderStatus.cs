@@ -1,9 +1,10 @@
-﻿using System;
+﻿using lanternagem_api.Interfaces;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace lanternagem_api.Models
 {
-  public class WorkOrderStatus
+  public class WorkOrderStatus : IEntity
   {
     [Key]
     public long Id { get; set; }
@@ -14,6 +15,11 @@ namespace lanternagem_api.Models
     {
       Status = status;
       StatusMoment = DateTime.Now;
+    }
+
+    public object GetPrimaryKey()
+    {
+      return Id;
     }
   }
   public enum WorkOrderStatusEnum

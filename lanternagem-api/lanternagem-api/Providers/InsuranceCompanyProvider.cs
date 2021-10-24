@@ -20,25 +20,25 @@ namespace lanternagem_api.Providers
       this.dbContext = dbContext;
       this.logger = logger;
     }
-    public async Task<(bool IsSuccess, string ErrorMessage)> AddInsuranceCompany(InsuranceCompany insuranceCompany)
+    public async Task<(bool IsSuccess, InsuranceCompany InsuranceCompany, string ErrorMessage)> AddInsuranceCompany(InsuranceCompany insuranceCompany)
     {
       try
       {
-        var result = await dbContext.AddOrUpdate(insuranceCompany);
+        var result = await dbContext.AddEntity(insuranceCompany);
 
         if (result.IsSuccess)
         {
-          return (true, null);
+          return (true, result.Entity, null);
         }
         else
         {
-          return (false, result.ErrorMessage);
+          return (false, null, result.ErrorMessage);
         }
       }
       catch (Exception ex)
       {
         logger.LogError(ex.ToString());
-        return (false, ex.Message.ToString());
+        return (false, null, ex.Message.ToString());
       }
     }
 
@@ -47,7 +47,7 @@ namespace lanternagem_api.Providers
       try
       {
         var result = await GetInsuranceBranchById(insuranceBranchId);
-        return await dbContext.Delete(result.InsuranceBranch);
+        return await dbContext.DeleteEntity(result.InsuranceBranch);
       }
       catch (Exception ex)
       {
@@ -61,7 +61,7 @@ namespace lanternagem_api.Providers
       try
       {
         var result = await GetInsuranceCompanyById(insuranceCompanyId);
-        return await dbContext.Delete(result.InsuranceCompany);
+        return await dbContext.DeleteEntity(result.InsuranceCompany);
       }
       catch (Exception ex)
       {
@@ -76,6 +76,7 @@ namespace lanternagem_api.Providers
       {
         InsuranceBranch insuranceBranch = await dbContext.InsuranceBranches
                                       .Include(i => i.Mother)
+                                      .Include(i => i.Customers)
                                       .Where(i => i.Id == insuranceBranchId)
                                       .FirstOrDefaultAsync();
         if (insuranceBranch != null)
@@ -188,7 +189,7 @@ namespace lanternagem_api.Providers
       }
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> UpdateInsuranceBranch(InsuranceBranch insuranceBranch)
+    public async Task<(bool IsSuccess, InsuranceBranch InsuranceBranch, string ErrorMessage)> UpdateInsuranceBranch(InsuranceBranch insuranceBranch)
     {
       try
       {
@@ -196,27 +197,44 @@ namespace lanternagem_api.Providers
         var dbInsuranceBranch = dbCompany.Children.Where(c => c.Id == insuranceBranch.Id).FirstOrDefault();
         dbInsuranceBranch = insuranceBranch;
         
-        var result = await dbContext.AddOrUpdate(dbInsuranceBranch);
+        var result = await dbContext.UpdateEntity(dbInsuranceBranch);
 
         if (result.IsSuccess)
         {
-          return (true, null);
+          return (true, result.Entity, null);
         }
         else
         {
-          return (false, result.ErrorMessage);
+          return (false, null, result.ErrorMessage);
         }
       }
       catch (Exception ex)
       {
         logger.LogError(ex.ToString());
-        return (false, ex.Message.ToString());
+        return (false, null, ex.Message.ToString());
       }
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> UpdateInsuranceCompany(InsuranceCompany insuranceCompany)
+    public async Task<(bool IsSuccess, InsuranceCompany InsuranceCompany, string ErrorMessage)> UpdateInsuranceCompany(InsuranceCompany insuranceCompany)
     {
-      return await AddInsuranceCompany(insuranceCompany);
+      try
+      {
+        var result = await dbContext.UpdateEntity(insuranceCompany);
+
+        if (result.IsSuccess)
+        {
+          return (true, result.Entity, null);
+        }
+        else
+        {
+          return (false, null, result.ErrorMessage);
+        }
+      }
+      catch (Exception ex)
+      {
+        logger.LogError(ex.ToString());
+        return (false, null, ex.Message.ToString());
+      }
     }
 
     private async Task<InsuranceCompany> GetCompanyByBranch(InsuranceBranch insuranceBranch)

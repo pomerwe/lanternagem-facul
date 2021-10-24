@@ -21,25 +21,25 @@ namespace lanternagem_api.Providers
       this.logger = logger;
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> AddCostumer(Customer customer)
+    public async Task<(bool IsSuccess, Customer customer, string ErrorMessage)> AddCostumer(Customer customer)
     {
       try
       {
-        var result = await dbContext.AddOrUpdate(customer);
+        var result = await dbContext.AddEntity(customer);
 
         if(result.IsSuccess)
         {
-          return (true, null);
+          return (true, result.Entity, null);
         }
         else
         {
-          return (false, result.ErrorMessage);
+          return (false, null, result.ErrorMessage);
         }
       }
       catch (Exception ex)
       {
         logger.LogError(ex.ToString());
-        return (false, ex.Message.ToString());
+        return (false, null, ex.Message.ToString());
       }
     }
 
@@ -48,7 +48,7 @@ namespace lanternagem_api.Providers
       try
       {
         var result = await GetCustomerByCPF(CPF);
-        return await dbContext.Delete(result.Customer);
+        return await dbContext.DeleteEntity(result.Customer);
       }
       catch (Exception ex)
       {
@@ -62,7 +62,7 @@ namespace lanternagem_api.Providers
       try
       {
         var result = await GetCustomerById(customerId);
-        return await dbContext.Delete(result.Customer);
+        return await dbContext.DeleteEntity(result.Customer);
       }
       catch (Exception ex)
       {
@@ -144,9 +144,26 @@ namespace lanternagem_api.Providers
       }
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> UpdateCostumer(Customer customer)
+    public async Task<(bool IsSuccess, Customer customer, string ErrorMessage)> UpdateCostumer(Customer customer)
     {
-       return await AddCostumer(customer);
+      try
+      {
+        var result = await dbContext.UpdateEntity(customer);
+
+        if (result.IsSuccess)
+        {
+          return (true, result.Entity, null);
+        }
+        else
+        {
+          return (false, null, result.ErrorMessage);
+        }
+      }
+      catch (Exception ex)
+      {
+        logger.LogError(ex.ToString());
+        return (false, null, ex.Message.ToString());
+      }
     }
   }
 }

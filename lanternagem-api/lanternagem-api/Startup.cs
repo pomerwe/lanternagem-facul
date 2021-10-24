@@ -1,4 +1,7 @@
 using lanternagem_api.Database;
+using lanternagem_api.Interfaces;
+using lanternagem_api.Providers;
+using lanternagem_api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +31,17 @@ namespace lanternagem_api
     {
       services.AddControllers();
 
+      services.AddScoped(typeof(ICustomerProvider), typeof(CustomerProvider));
+      services.AddScoped(typeof(IInsuranceCompanyProvider), typeof(InsuranceCompanyProvider));
+      services.AddScoped(typeof(IInsuranceService), typeof(InsuranceService));
+      services.AddScoped(typeof(Interfaces.IServiceProvider), typeof(Providers.ServiceProvider));
+      services.AddScoped(typeof(IWorkOrderProvider), typeof(WorkOrderProvider));
+
       services.AddDbContext<InsuranceDbContext>(op => op.UseInMemoryDatabase("LanternagemDatabase"));
+      services.AddSwaggerGen(c =>
+      {
+        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() { Title = "Lanternagem API" });
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +59,12 @@ namespace lanternagem_api
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+      });
+
+      app.UseSwagger();
+      app.UseSwaggerUI(c =>
+      {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Configuration V1");
       });
     }
   }

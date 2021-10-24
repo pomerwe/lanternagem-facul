@@ -20,25 +20,25 @@ namespace lanternagem_api.Providers
       this.dbContext = dbContext;
       this.logger = logger;
     }
-    public async Task<(bool IsSuccess, string ErrorMessage)> AddWorkOrder(WorkOrder workOrder)
+    public async Task<(bool IsSuccess, WorkOrder WorkOrder, string ErrorMessage)> AddWorkOrder(WorkOrder workOrder)
     {
       try
       {
-        var result = await dbContext.AddOrUpdate(workOrder);
+        var result = await dbContext.AddEntity(workOrder);
 
         if (result.IsSuccess)
         {
-          return (true, null);
+          return (true, result.Entity, null);
         }
         else
         {
-          return (false, result.ErrorMessage);
+          return (false, null, result.ErrorMessage);
         }
       }
       catch (Exception ex)
       {
         logger.LogError(ex.ToString());
-        return (false, ex.Message.ToString());
+        return (false, null, ex.Message.ToString());
       }
     }
 
@@ -47,7 +47,7 @@ namespace lanternagem_api.Providers
       try
       {
         var result = await GetWorkOrderById(workOrderId);
-        return await dbContext.Delete(result.WorkOrder);
+        return await dbContext.DeleteEntity(result.WorkOrder);
       }
       catch (Exception ex)
       {
@@ -143,9 +143,26 @@ namespace lanternagem_api.Providers
       }
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> UpdateWorkOrder(WorkOrder workOrder)
+    public async Task<(bool IsSuccess, WorkOrder WorkOrder, string ErrorMessage)> UpdateWorkOrder(WorkOrder workOrder)
     {
-      return await AddWorkOrder(workOrder);
+      try
+      {
+        var result = await dbContext.UpdateEntity(workOrder);
+
+        if (result.IsSuccess)
+        {
+          return (true, result.Entity, null);
+        }
+        else
+        {
+          return (false, null, result.ErrorMessage);
+        }
+      }
+      catch (Exception ex)
+      {
+        logger.LogError(ex.ToString());
+        return (false, null, ex.Message.ToString());
+      }
     }
   }
 }

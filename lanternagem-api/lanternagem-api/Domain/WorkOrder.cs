@@ -1,24 +1,33 @@
-﻿using System;
+﻿using lanternagem_api.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection.Metadata;
 
 namespace lanternagem_api.Models
 {
-  public class WorkOrder
+  public class WorkOrder : IEntity
   {
     [Key]
     public long Id { get; set; }
     public Customer Customer { get;set; }
     public Vehicle Vehicle { get; set; }
+
+    [NotMapped]
     public List<Blob> AccidentImages { get; set; }
+
     public Accident Accident { get; set; }
     public Service Service { get; set; }
     public List<WorkOrderStep> Steps { get; set; }
     public string Description { get; set; }
     public List<WorkOrderStatus> Status { get; set; }
 
+    public WorkOrder()
+    {
+
+    }
     public WorkOrder(Customer customer, Vehicle vehicle, string description)
     {
       Customer = customer;
@@ -60,7 +69,7 @@ namespace lanternagem_api.Models
 
       if(currentStep == null)
       {
-        throw new Exception("All steps already finished!")
+                throw new Exception("All steps already finished!");
       }
 
       currentStep.Finish();
@@ -90,6 +99,11 @@ namespace lanternagem_api.Models
     public bool IsClosed()
     {
       return Status.Any(s => s.Status == WorkOrderStatusEnum.Finished || s.Status == WorkOrderStatusEnum.Canceled);
+    }
+
+    public object GetPrimaryKey()
+    {
+      return Id;
     }
   }
 }

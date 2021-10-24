@@ -19,25 +19,25 @@ namespace lanternagem_api.Providers
       this.dbContext = dbContext;
       this.logger = logger;
     }
-    public async Task<(bool IsSuccess, string ErrorMessage)> AddService(Service service)
+    public async Task<(bool IsSuccess, Service Service, string ErrorMessage)> AddService(Service service)
     {
       try
       {
-        var result = await dbContext.AddOrUpdate(service);
+        var result = await dbContext.AddEntity(service);
 
         if (result.IsSuccess)
         {
-          return (true, null);
+          return (true, result.Entity, null);
         }
         else
         {
-          return (false, result.ErrorMessage);
+          return (false, null, result.ErrorMessage);
         }
       }
       catch (Exception ex)
       {
         logger.LogError(ex.ToString());
-        return (false, ex.Message.ToString());
+        return (false, null, ex.Message.ToString());
       }
     }
 
@@ -46,7 +46,7 @@ namespace lanternagem_api.Providers
       try
       {
         var result = await GetServiceById(serviceId);
-        return await dbContext.Delete(result.Service);
+        return await dbContext.DeleteEntity(result.Service);
       }
       catch (Exception ex)
       {
@@ -101,9 +101,26 @@ namespace lanternagem_api.Providers
       }
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> UpdateService(Service service)
+    public async Task<(bool IsSuccess, Service Service, string ErrorMessage)> UpdateService(Service service)
     {
-      return await AddService(service);
+      try
+      {
+        var result = await dbContext.UpdateEntity(service);
+
+        if (result.IsSuccess)
+        {
+          return (true, result.Entity, null);
+        }
+        else
+        {
+          return (false, null, result.ErrorMessage);
+        }
+      }
+      catch (Exception ex)
+      {
+        logger.LogError(ex.ToString());
+        return (false, null, ex.Message.ToString());
+      }
     }
   }
 }

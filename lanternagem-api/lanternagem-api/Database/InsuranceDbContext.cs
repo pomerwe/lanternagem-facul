@@ -1,4 +1,5 @@
-﻿using lanternagem_api.Models;
+﻿using lanternagem_api.Interfaces;
+using lanternagem_api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,20 +25,20 @@ namespace lanternagem_api.Database
 
     }
 
-    public async Task<(bool IsSuccess, T Entity, string ErrorMessage)> AddOrUpdate<T>(T entity) where T : class
+    public async Task<(bool IsSuccess, T Entity, string ErrorMessage)> AddEntity<T>(T entity) where T : class
     {
       try
       {
         var entitySet = Set<T>();
-        var dbEntity = entitySet.Find(entity);
-        if (dbEntity != null)
+
+        var dbEntity = GetDbEntity(entity);
+
+        if(dbEntity != null)
         {
-          entitySet.Update(entity);
+          throw new Exception("Entity already exists in database!");
         }
-        else
-        {
-          await entitySet.AddAsync(entity);
-        }
+
+        await entitySet.AddAsync(entity);
         await SaveChangesAsync();
         Entry(entity).State = EntityState.Detached;
         return (true, entity, null);
@@ -48,7 +49,31 @@ namespace lanternagem_api.Database
       }
     }
 
-    public async Task<(bool IsSuccess, string ErrorMessage)> Delete<T>(T entity) where T : class
+    public async Task<(bool IsSuccess, T Entity, string ErrorMessage)> UpdateEntity<T>(T entity) where T : class
+    {
+      try
+      {
+        var entitySet = Set<T>();
+
+        var dbEntity = GetDbEntity(entity);
+
+        if (dbEntity == null)
+        {
+          throw new Exception("Entity does not exist in database!");
+        }
+
+        entitySet.Update(entity);
+        await SaveChangesAsync();
+        Entry(entity).State = EntityState.Detached;
+        return (true, entity, null);
+      }
+      catch (Exception ex)
+      {
+        return (false, null, ex.ToString());
+      }
+    }
+
+    public async Task<(bool IsSuccess, string ErrorMessage)> DeleteEntity<T>(T entity) where T : class
     {
       try
       {
@@ -61,6 +86,15 @@ namespace lanternagem_api.Database
       {
         return (false, ex.ToString());
       }
+    }
+
+    private T GetDbEntity<T>(T entity) where T : class
+    {
+      var entitySet = Set<T>();
+      var pk = ((IEntity)entity).GetPrimaryKey();
+      var dbEntity = entitySet.Find(pk);
+
+      return dbEntity;
     }
   }
 }

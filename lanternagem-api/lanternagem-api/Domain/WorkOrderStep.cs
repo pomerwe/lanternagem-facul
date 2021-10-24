@@ -3,6 +3,11 @@
   public class WorkOrderStep : ServiceStep
   {
     private bool completed;
+
+    public WorkOrderStep()
+    {
+
+    }
     public WorkOrderStep(ServiceStep serviceStep)
     {
       Name = serviceStep.Name;
