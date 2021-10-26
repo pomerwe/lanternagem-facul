@@ -1,4 +1,5 @@
-﻿using lanternagem_api.Interfaces;
+﻿using lanternagem_api.Domain;
+using lanternagem_api.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,17 +9,24 @@ using System.Threading.Tasks;
 
 namespace lanternagem_api.Models
 {
-  public class Customer : IEntity
+  public class Customer : User
   {
-    [Key]
-    public long Id { get; set; }
     public string Name { get; set; }
     public string CPF { get; set; }
     public List<Vehicle> Vehicles { get; set; }
     public List<WorkOrder> WorkOrders { get; set; }
+    public SystemUser User { get; set; }
+
+    public Customer()
+    {
+      Vehicles = new List<Vehicle>();
+      WorkOrders = new List<WorkOrder>();
+    }
 
     [JsonIgnore]
     public InsuranceBranch LinkedBranch { get; set; }
+    public DateTime SignatureExpirationDate { get; set; }
+    public bool IsSignatureExpired() => DateTime.Now > SignatureExpirationDate;
 
     public Vehicle PickVehicle(string LicensePlate)
     {
@@ -43,9 +51,14 @@ namespace lanternagem_api.Models
       Vehicles.Add(vehicle);
     }
 
-    public object GetPrimaryKey()
+    public override string GetName()
     {
-      return Id;
+      return Name;
+    }
+
+    public override string GetCPF()
+    {
+      return CPF;
     }
   }
 }

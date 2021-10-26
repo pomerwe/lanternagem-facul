@@ -1,4 +1,5 @@
-﻿using lanternagem_api.Interfaces;
+﻿using lanternagem_api.Domain;
+using lanternagem_api.Interfaces;
 using lanternagem_api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,8 @@ namespace lanternagem_api.Database
     public DbSet<WorkOrder> WorkOrders { get; set; }
     public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
     public DbSet<WorkOrderStep> WorkOrderSteps { get; set; }
+    public DbSet<SystemUser> Users { get; set; }
+
     public InsuranceDbContext(DbContextOptions options) : base(options)
     {
 

@@ -15,6 +15,11 @@ namespace lanternagem_api.Models
     public string Name { get; set; }
     public string CNPJ { get; set; }
 
+    public InsuranceCompany()
+    {
+      Children = new List<InsuranceBranch>();
+    }
+
     public void AddChildBranch(InsuranceBranch insuranceBranch)
     {
       if (insuranceBranch == null)

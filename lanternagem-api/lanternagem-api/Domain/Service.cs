@@ -12,6 +12,11 @@ namespace lanternagem_api.Models
     public string Description { get; set; }
     public List<ServiceStep> Steps { get; set; }
 
+    public Service()
+    {
+      Steps = new List<ServiceStep>();
+    }
+
     public object GetPrimaryKey()
     {
       return Id;

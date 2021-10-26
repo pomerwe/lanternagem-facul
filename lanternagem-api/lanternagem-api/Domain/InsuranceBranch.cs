@@ -14,6 +14,11 @@ namespace lanternagem_api.Models
     public string Name { get; set; }
     public List<Customer> Customers { get; set; }
 
+    public InsuranceBranch()
+    {
+      Customers = new List<Customer>();
+    }
+
     public void AddNewCustomer(Customer customer)
     {
       if (customer == null)

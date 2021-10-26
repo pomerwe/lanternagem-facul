@@ -26,7 +26,9 @@ namespace lanternagem_api.Models
 
     public WorkOrder()
     {
-
+      AccidentImages = new List<Blob>();
+      Steps = new List<WorkOrderStep>();
+      Status = new List<WorkOrderStatus>();
     }
     public WorkOrder(Customer customer, Vehicle vehicle, string description)
     {

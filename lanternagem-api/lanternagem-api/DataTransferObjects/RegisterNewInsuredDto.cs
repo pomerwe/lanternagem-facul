@@ -11,6 +11,7 @@ namespace lanternagem_api.DataTransferObjects
     public int LinkedBranchId { get; set; }
     public NewCustomerDto NewCustomer { get; set; }
     public Vehicle CustomerVehile { get; set; }
+    public DateTime SignatureExpirationDate { get; set; }
   }
 
   public class NewCustomerDto

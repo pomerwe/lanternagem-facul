@@ -36,6 +36,8 @@ namespace lanternagem_api
       services.AddScoped(typeof(IInsuranceService), typeof(InsuranceService));
       services.AddScoped(typeof(Interfaces.IServiceProvider), typeof(Providers.ServiceProvider));
       services.AddScoped(typeof(IWorkOrderProvider), typeof(WorkOrderProvider));
+      services.AddScoped(typeof(ISystemUserProvider), typeof(SystemUserProvider));
+      services.AddScoped(typeof(ISystemManagementService), typeof(SystemManagementService));
 
       services.AddDbContext<InsuranceDbContext>(op => op.UseInMemoryDatabase("LanternagemDatabase"));
       services.AddSwaggerGen(c =>

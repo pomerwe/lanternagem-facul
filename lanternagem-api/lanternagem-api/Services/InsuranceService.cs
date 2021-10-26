@@ -14,16 +14,19 @@ namespace lanternagem_api.Services
     private readonly ILogger<InsuranceService> logger;
     private readonly IInsuranceCompanyProvider insuranceCompanyProvider;
     private readonly ICustomerProvider costumerProvider;
+    private readonly ISystemManagementService systemManagementService;
 
     public InsuranceService(
       ILogger<InsuranceService> logger, 
       IInsuranceCompanyProvider insuranceCompanyProvider, 
-      ICustomerProvider costumerProvider
+      ICustomerProvider costumerProvider,
+      ISystemManagementService systemManagementService
       )
     {
       this.logger = logger;
       this.insuranceCompanyProvider = insuranceCompanyProvider;
       this.costumerProvider = costumerProvider;
+      this.systemManagementService = systemManagementService;
     }
 
     public async Task<(bool IsSuccess, InsuranceCompany CreatedInsuranceCompany, string ErrorMessage)> RegisterNewInsuranceCompany(RegisterNewInsuranceCompanyDto registerNewInsuranceCompanyDto)
@@ -102,6 +105,11 @@ namespace lanternagem_api.Services
         customer.AddVehicle(registerNewInsuredDto.CustomerVehile);
 
         linkedBranch.AddNewCustomer(customer);
+
+        var createdUser = await systemManagementService.InsertNewUserForCostumer(customer);
+
+        if (!createdUser.IsSuccess)
+          return (false, null, createdUser.ErrorMessage);
 
         var result = await insuranceCompanyProvider.UpdateInsuranceBranch(linkedBranch);
 
