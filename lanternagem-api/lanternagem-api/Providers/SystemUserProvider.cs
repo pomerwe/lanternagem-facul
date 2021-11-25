@@ -46,7 +46,7 @@ namespace lanternagem_api.Providers
     {
       try
       {
-        var result = await GetUserByLogin(login);
+        var result = await GetUserByUsername(login);
         return await dbContext.DeleteEntity(result.User);
       }
       catch (Exception ex)
@@ -56,13 +56,13 @@ namespace lanternagem_api.Providers
       }
     }
 
-    public async Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> GetUserByLogin(string login)
+    public async Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> GetUserByUsername(string login)
     {
       try
       {
         SystemUser User = await dbContext.Users
                                            .Include(u => u.User)
-                                           .FirstOrDefaultAsync();
+                                           .FirstOrDefaultAsync(u => u.Username == login);
         if (User != null)
         {
           return (true, User, null);

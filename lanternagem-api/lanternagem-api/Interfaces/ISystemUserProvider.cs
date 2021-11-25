@@ -8,7 +8,7 @@ namespace lanternagem_api.Interfaces
 {
   public interface ISystemUserProvider
   {
-    Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> GetUserByLogin(string login);
+    Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> GetUserByUsername(string login);
     Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> AddUser(SystemUser user);
     Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> UpdateUser(SystemUser user);
     Task<(bool IsSuccess, string ErrorMessage)> DeleteUserUsingLogin(string login);

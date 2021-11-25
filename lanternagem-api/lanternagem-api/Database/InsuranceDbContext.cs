@@ -1,6 +1,7 @@
 ﻿using lanternagem_api.Domain;
 using lanternagem_api.Interfaces;
 using lanternagem_api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

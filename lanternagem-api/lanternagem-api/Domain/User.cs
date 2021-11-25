@@ -14,5 +14,10 @@ namespace lanternagem_api.Domain
 
     public abstract string GetCPF();
     public abstract string GetName();
+
+    public object GetPrimaryKey()
+    {
+      return Id;
+    }
   }
 }
