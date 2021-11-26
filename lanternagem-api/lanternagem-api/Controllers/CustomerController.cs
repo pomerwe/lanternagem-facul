@@ -20,7 +20,23 @@ namespace lanternagem_api.Controllers
             this.customerProvider = customerProvider;
         }
 
-        [HttpGet("{insuranceBranchId}")]
+        [HttpGet("get-customer-by-id/{customerId}")]
+        [Authorize]
+        public async Task<IActionResult> GetCustomerById(long customerId)
+        {
+            var result = await customerProvider.GetCustomerById(customerId);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Customer);
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
+        [HttpGet("get-customers-by-branch/{insuranceBranchId}")]
         [Authorize]
         public async Task<IActionResult> GetCustomers(int insuranceBranchId)
         {
@@ -36,7 +52,7 @@ namespace lanternagem_api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("update-costumer")]
         [Authorize]
         public async Task<IActionResult> UpdateCostumer([FromBody] Customer customer)
         {
@@ -45,6 +61,22 @@ namespace lanternagem_api.Controllers
             if (result.IsSuccess)
             {
                 return Ok(customer);
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
+        [HttpDelete("delete-customer/{customerId}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteCustomer(long customerId)
+        {
+            var result = await customerProvider.DeleteCostumerUsingId(customerId);
+
+            if (result.IsSuccess)
+            {
+                return NoContent();
             }
             else
             {

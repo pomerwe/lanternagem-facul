@@ -1,6 +1,6 @@
 ﻿using lanternagem_api.Database;
-using lanternagem_api.Domain;
 using lanternagem_api.Interfaces;
+using lanternagem_api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,36 +10,21 @@ using System.Threading.Tasks;
 
 namespace lanternagem_api.Providers
 {
-    public class SystemUserProvider : ISystemUserProvider
+    public class AccidentProvider : IAccidentProvider
     {
         private readonly InsuranceDbContext dbContext;
-        private readonly ILogger<SystemUserProvider> logger;
+        private readonly ILogger<AccidentProvider> logger;
 
-        public SystemUserProvider(InsuranceDbContext dbContext, ILogger<SystemUserProvider> logger)
+        public AccidentProvider(InsuranceDbContext dbContext, ILogger<AccidentProvider> logger)
         {
             this.dbContext = dbContext;
             this.logger = logger;
-
-            CreateAdmin();
         }
-
-        private void CreateAdmin()
-        {
-            var admin = new SystemUser()
-            {
-                Username = "admin",
-                Password = "admin"
-            };
-
-            this.dbContext.Users.Add(admin);
-            this.dbContext.SaveChanges();
-        }
-
-        public async Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> AddUser(SystemUser user)
+        public async Task<(bool IsSuccess, Accident Accident, string ErrorMessage)> AddAccident(Accident accident)
         {
             try
             {
-                var result = await dbContext.AddEntity(user);
+                var result = await dbContext.AddEntity(accident);
 
                 if (result.IsSuccess)
                 {
@@ -57,19 +42,20 @@ namespace lanternagem_api.Providers
             }
         }
 
-        public async Task<(bool IsSuccess, string ErrorMessage)> DeleteUserUsingLogin(string login)
+        public async Task<(bool IsSuccess, string ErrorMessage)> DeleteAccident(int accidentId)
         {
             try
             {
-                var result = await GetUserByUsername(login);
-                if (result.IsSuccess)
+                var result = await GetAccidentById(accidentId);
+                if(result.IsSuccess)
                 {
-                    return await dbContext.DeleteEntity(result.User);
+                    return await dbContext.DeleteEntity(result.Accident);
                 }
                 else
                 {
                     return (false, result.ErrorMessage);
                 }
+               
             }
             catch (Exception ex)
             {
@@ -78,20 +64,19 @@ namespace lanternagem_api.Providers
             }
         }
 
-        public async Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> GetUserByUsername(string login)
+        public async Task<(bool IsSuccess, Accident Accident, string ErrorMessage)> GetAccidentById(int id)
         {
             try
             {
-                SystemUser User = await dbContext.Users
-                                                   .Include(u => u.User)
-                                                   .FirstOrDefaultAsync(u => u.Username == login);
-                if (User != null)
+                Accident accident = await dbContext.Accidents
+                                                 .FirstOrDefaultAsync(a => a.Id == id);
+                if (accident != null)
                 {
-                    return (true, User, null);
+                    return (true, accident, null);
                 }
                 else
                 {
-                    return (false, null, "User not found in system!");
+                    return (false, null, "Accident not found!");
                 }
             }
             catch (Exception ex)
@@ -101,11 +86,33 @@ namespace lanternagem_api.Providers
             }
         }
 
-        public async Task<(bool IsSuccess, SystemUser User, string ErrorMessage)> UpdateUser(SystemUser user)
+        public async Task<(bool IsSuccess, List<Accident> Accidents, string ErrorMessage)> GetAccidents()
         {
             try
             {
-                var result = await dbContext.UpdateEntity(user);
+                List<Accident> accidents = await dbContext.Accidents
+                                                        .ToListAsync();
+                if (accidents.Any())
+                {
+                    return (true, accidents, null);
+                }
+                else
+                {
+                    return (false, null, "No accidents recorded!");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.ToString());
+                return (false, null, ex.Message.ToString());
+            }
+        }
+
+        public async Task<(bool IsSuccess, Accident Accident, string ErrorMessage)> UpdateAccident(Accident accident)
+        {
+            try
+            {
+                var result = await dbContext.UpdateEntity(accident);
 
                 if (result.IsSuccess)
                 {

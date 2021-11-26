@@ -1,5 +1,6 @@
 ﻿using lanternagem_api.DataTransferObjects;
 using lanternagem_api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost(NEW_INSURANCE_COMPANY_URI)]
+        [Authorize]
         public async Task<IActionResult> NewInsuranceCompany(RegisterNewInsuranceCompanyDto dto)
         {
             var result = await insuranceService.RegisterNewInsuranceCompany(dto);
@@ -38,6 +40,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost(NEW_INSURANCE_BRANCH_URI)]
+        [Authorize]
         public async Task<IActionResult> NewInsuranceBranch(RegisterNewInsuranceBranchDto dto)
         {
             var result = await insuranceService.RegisterNewInsuranceBranch(dto);
@@ -53,6 +56,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost(NEW_INSURED_URI)]
+        [Authorize]
         public async Task<IActionResult> NewInsuranceCompany(RegisterNewInsuredDto dto)
         {
             var result = await insuranceService.RegisterNewInsured(dto);

@@ -1,35 +1,38 @@
-﻿namespace lanternagem_api.Models
+﻿using System.Text.Json.Serialization;
+
+namespace lanternagem_api.Models
 {
-  public class WorkOrderStep : ServiceStep
-  {
-    private bool completed;
-
-    public WorkOrderStep()
+    public class WorkOrderStep : ServiceStep
     {
+        [JsonIgnore]
+        public bool Completed { get; set; }
 
-    }
-    public WorkOrderStep(ServiceStep serviceStep)
-    {
-      Name = serviceStep.Name;
-      AverageTime = serviceStep.AverageTime;
-      Description = serviceStep.Description;
-      Order = serviceStep.Order;
-      completed = false;
-    }
+        public WorkOrderStep()
+        {
 
-    public void Cancel()
-    {
-      completed = false;
-    }
+        }
+        public WorkOrderStep(ServiceStep serviceStep)
+        {
+            Name = serviceStep.Name;
+            AverageTime = serviceStep.AverageTime;
+            Description = serviceStep.Description;
+            Order = serviceStep.Order;
+            Completed = false;
+        }
 
-    public void Finish()
-    {
-      completed = true;
-    }
+        public void Reopen()
+        {
+            Completed = false;
+        }
 
-    public bool IsCompleted()
-    {
-      return completed;
+        public void Finish()
+        {
+            Completed = true;
+        }
+
+        public bool IsCompleted()
+        {
+            return Completed;
+        }
     }
-  }
 }

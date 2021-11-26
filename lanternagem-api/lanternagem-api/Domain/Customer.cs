@@ -14,6 +14,8 @@ namespace lanternagem_api.Models
         public string Name { get; set; }
         public string CPF { get; set; }
         public List<Vehicle> Vehicles { get; set; }
+
+        [JsonIgnore]
         public List<WorkOrder> WorkOrders { get; set; }
 
         [JsonIgnore]

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace lanternagem_api.DataTransferObjects
 {
-    public class RegisterNewInsuranceCompanyDto
+    public class WorkOrderDto
     {
-        public string Name { get; set; }
-        public string CNPJ { get; set; }
+        public long WorkOrderId { get; set; }
     }
 }

@@ -1,0 +1,974 @@
+{
+	"info": {
+		"_postman_id": "0cf1cc00-e223-46a8-b405-00d898e92722",
+		"name": "InsuranceCompany",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accident",
+			"item": [
+				{
+					"name": "AddAccident",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Batida\",\r\n  \"description\": \"Para qualquer batida de carro.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/accident/add-accident",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"accident",
+								"add-accident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAccident",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"Pneu furado\",\r\n  \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/accident/update-accident",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"accident",
+								"update-accident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccidentById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/accident/get-accident-by-id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"accident",
+								"get-accident-by-id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccidents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/accident/get-accidents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"accident",
+								"get-accidents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAccident",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/accident/delete-accident/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"accident",
+								"delete-accident",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "AddService",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Reboque\",\r\n  \"description\": \"Serviço destinado a reboque.\",\r\n  \"steps\": [\r\n    {\r\n      \"name\": \"Atender chamado\",\r\n      \"description\": \"Completar quando tiver alguém cuidando do chamado\",\r\n      \"averageTime\": 20,\r\n      \"order\": 0\r\n    },\r\n    {\r\n      \"name\": \"Ponto de coleta\",\r\n      \"description\": \"Completar quando tiver no ponto de coleta do veículo\",\r\n      \"averageTime\": 80,\r\n      \"order\": 1\r\n    },\r\n    {\r\n      \"name\": \"Entrega na oficina\",\r\n      \"description\": \"Completar quando veículo tiver entregue na oficina\",\r\n      \"averageTime\": 60,\r\n      \"order\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/service/add-service",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"service",
+								"add-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateService",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":1,\r\n  \"name\": \"Reboque rápido\",\r\n  \"description\": \"Serviço destinado a reboque.\",\r\n  \"steps\": [\r\n    {\r\n      \"name\": \"Atender chamado rápido\",\r\n      \"description\": \"Completar quando tiver alguém cuidando do chamado\",\r\n      \"averageTime\": 20,\r\n      \"order\": 0\r\n    },\r\n    {\r\n      \"name\": \"Ponto de coleta\",\r\n      \"description\": \"Completar quando tiver no ponto de coleta do veículo\",\r\n      \"averageTime\": 80,\r\n      \"order\": 1\r\n    },\r\n    {\r\n      \"name\": \"Entrega na oficina\",\r\n      \"description\": \"Completar quando veículo tiver entregue na oficina\",\r\n      \"averageTime\": 60,\r\n      \"order\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/service/update-service",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"service",
+								"update-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetServiceById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/service/get-service-by-id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"service",
+								"get-service-by-id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetServices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/service/get-services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"service",
+								"get-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteService",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/service/delete-service/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"service",
+								"delete-service",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "GetCustomerById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/customer/get-customer-by-id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"customer",
+								"get-customer-by-id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomerByBranch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/customer/get-customers-by-branch/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"customer",
+								"get-customers-by-branch",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Estevão\",\r\n    \"cpf\": \"14615080611\",\r\n    \"vehicles\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Dragão Alado Vermelhão\",\r\n            \"licensePlate\": \"A7J99K\",\r\n            \"model\": \"Lamborghini Gallardo\",\r\n            \"brand\": \"Lamborghini\",\r\n            \"color\": \"Vermelho\"\r\n        }\r\n    ],\r\n    \"workOrders\": [],\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/customer/update-costumer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"customer",
+								"update-costumer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCostumer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/customer/delete-customer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"customer",
+								"delete-customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InsuranceProcesses",
+			"item": [
+				{
+					"name": "AddInsuranceCompany",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Seguradora Sonic The Hedgehog\",\r\n  \"cnpj\": \"98365959535353\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/insurance-processes/new-insurance-company",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"insurance-processes",
+								"new-insurance-company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddInsuranceBranch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4Mjc5LCJleHAiOjE2Mzc4OTU0NzksImlhdCI6MTYzNzg4ODI3OX0.HYOAmGtXyxRuY9kcUZCwkBw5IO0xQJ9nJyf4bCftv2M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"motherCompanyId\": 1,\r\n  \"cnpj\": \"21388484842321\",\r\n  \"name\": \"Filial Tails\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/insurance-processes/new-insurance-branch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"insurance-processes",
+								"new-insurance-branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddInsured",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4Mjc5LCJleHAiOjE2Mzc4OTU0NzksImlhdCI6MTYzNzg4ODI3OX0.HYOAmGtXyxRuY9kcUZCwkBw5IO0xQJ9nJyf4bCftv2M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"linkedBranchId\": 1,\r\n  \"newCustomer\": {\r\n    \"name\": \"Estevão\",\r\n    \"cpf\": \"14615080611\"\r\n  },\r\n  \"customerVehile\": {\r\n    \"id\": 0,\r\n    \"name\": \"Dragão Alado\",\r\n    \"licensePlate\": \"A7J99K\",\r\n    \"model\": \"Lamborghini Gallardo\",\r\n    \"brand\": \"Lamborghini\",\r\n    \"color\": \"Vermelho\"\r\n  },\r\n  \"signatureExpirationDate\": \"2021-11-25T23:16:32.283Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/insurance-processes/new-insured",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"insurance-processes",
+								"new-insured"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WorkOrder",
+			"item": [
+				{
+					"name": "GetWorkOrdersByCostumerCPF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/get-work-orders-by-customer-cpf/14615080611",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"get-work-orders-by-customer-cpf",
+								"14615080611"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkOrdersByCostumerId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/get-work-orders-by-customerId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"get-work-orders-by-customerId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkOrderById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/get-work-order-by-id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"get-work-order-by-id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterWorkOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 1,\r\n  \"licensePlate\": \"A7J99K\",\r\n  \"description\": \"Carro bateu e precisa de reboque.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/register-work-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"register-work-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BindServiceToWorkOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceId\": 1,\r\n  \"workOrderId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/bind-service-to-work-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"bind-service-to-work-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BindAccidentToWorkOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accidentId\": 1,\r\n  \"workOrderId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/bind-accident-to-work-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"bind-accident-to-work-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompleteStep",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"workOrderId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/complete-step",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"complete-step"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelStep",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"workOrderId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/cancel-step",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"cancel-step"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FinishWorkOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"workOrderId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/finish-work-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"finish-work-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelWorkOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"workOrderId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/cancel-work-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"cancel-work-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateWorkOrder",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4MTc0LCJleHAiOjE2Mzc4OTUzNzQsImlhdCI6MTYzNzg4ODE3NH0.EprgngwfrT51hUbZYQjZYAVRp-g7Wbezz-4E15T08eg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"workOrderId\": 1,\r\n  \"description\": \"Exploddiu foi tudo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/work-order/update-work-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"work-order",
+								"update-work-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1534/api/account-controller/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1534",
+					"path": [
+						"api",
+						"account-controller",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

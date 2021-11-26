@@ -47,9 +47,11 @@ namespace lanternagem_api
             services.AddScoped(typeof(IInsuranceService), typeof(InsuranceService));
             services.AddScoped(typeof(Interfaces.IServiceProvider), typeof(Providers.ServiceProvider));
             services.AddScoped(typeof(IWorkOrderProvider), typeof(WorkOrderProvider));
+            services.AddScoped(typeof(IWorkOrderService), typeof(WorkOrderService));
             services.AddScoped(typeof(ISystemUserProvider), typeof(SystemUserProvider));
             services.AddScoped(typeof(ISystemManagementService), typeof(SystemManagementService));
             services.AddScoped(typeof(ITokenService), typeof(TokenService));
+            services.AddScoped(typeof(IAccidentProvider), typeof(AccidentProvider));
 
             services.AddSwaggerGen(c =>
             {
