@@ -13,7 +13,7 @@ namespace lanternagem_api.Services
     {
         private readonly ILogger<InsuranceService> logger;
         private readonly IInsuranceCompanyProvider insuranceCompanyProvider;
-        private readonly ICustomerProvider costumerProvider;
+        private readonly ICustomerProvider customerProvider;
         private readonly ISystemManagementService systemManagementService;
 
         public InsuranceService(
@@ -25,7 +25,7 @@ namespace lanternagem_api.Services
         {
             this.logger = logger;
             this.insuranceCompanyProvider = insuranceCompanyProvider;
-            this.costumerProvider = costumerProvider;
+            this.customerProvider = costumerProvider;
             this.systemManagementService = systemManagementService;
         }
 
@@ -125,6 +125,48 @@ namespace lanternagem_api.Services
             catch (Exception ex)
             {
                 logger.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+
+        public async Task<(bool IsSuccess, Vehicle AddedVehicle, string ErrorMessage)> AddVehicleToInsured(AddVehicleToInsuredDto addVehicleToInsuredDto)
+        {
+            try
+            {
+                var customerResult = await customerProvider.GetCustomerById(addVehicleToInsuredDto.CustomerId);
+                if(customerResult.IsSuccess)
+                {
+                    var customer = customerResult.Customer;
+
+                    var vehicle = new Vehicle()
+                    {
+                        Brand = addVehicleToInsuredDto.Brand,
+                        Color = addVehicleToInsuredDto.Color,
+                        LicensePlate = addVehicleToInsuredDto.LicensePlate,
+                        Model = addVehicleToInsuredDto.Model,
+                        Name = addVehicleToInsuredDto.Name
+                    };
+
+                    customer.AddVehicle(vehicle);
+
+                    var result = await customerProvider.UpdateCostumer(customer);
+
+                    if(result.IsSuccess)
+                    {
+                        return (true, result.Customer.PickVehicle(vehicle.LicensePlate), null);
+                    }
+                    else
+                    {
+                        return (false, null, result.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    return (false, null, customerResult.ErrorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
                 return (false, null, ex.Message);
             }
         }

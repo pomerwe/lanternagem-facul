@@ -1,4 +1,5 @@
 ﻿using lanternagem_api.DataTransferObjects;
+using lanternagem_api.Domain;
 using lanternagem_api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-work-orders-by-customer-cpf/{CPF}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> GetWorkOrdersByCustomerCPF(string CPF)
         {
             var result = await workOrderService.GetWorkOrdersByCustomerCPF(CPF);
@@ -37,7 +38,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-work-orders-by-customerId/{customerId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> GetWorkOrdersByCustomerId(long customerId)
         {
             var result = await workOrderService.GetWorkOrdersByCustomerId(customerId);
@@ -53,14 +54,22 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-work-order-by-id/{workOrderId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> GetWorkOrderById(long workOrderId)
         {
             var result = await workOrderService.GetWorkOrderById(workOrderId);
 
             if (result.IsSuccess)
             {
-                return Ok(result.WorkOrder);
+                var workOrder = result.WorkOrder;
+                bool isWorkOrderFromRequestedUser = User.Identity.Name == workOrder.Customer.User.Username;
+                bool isAdminOrManager = User.IsInRole(Role.Admin.ToString()) || User.IsInRole(Role.Manager.ToString()); 
+
+                if(isWorkOrderFromRequestedUser || isAdminOrManager)
+                {
+                    return Ok(isWorkOrderFromRequestedUser);
+                }
+                return Unauthorized("Requesting unauthorized work order!");
             }
             else
             {
@@ -69,7 +78,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("register-work-order")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> RegisterWorkOrder(RegisterWorkOrderDto registerWorkOrderDto)
         {
             var result = await workOrderService.RegisterWorkOrder(registerWorkOrderDto);
@@ -85,7 +94,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("bind-service-to-work-order")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> BindServiceToWorkOrder(BindServiceToWorkOrderDto bindServiceToWorkOrderDto)
         {
             var result = await workOrderService.BindServiceToWorkOrder(bindServiceToWorkOrderDto);
@@ -101,7 +110,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("bind-accident-to-work-order")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> BindAccidentToWorkOrder(BindAccidentToWorkOrderDto bindAccidentToWorkOrderDto)
         {
             var result = await workOrderService.BindAccidentToWorkOrder(bindAccidentToWorkOrderDto);
@@ -117,7 +126,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("complete-step")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> CompleteStep(WorkOrderDto workOrderDto)
         {
             var result = await workOrderService.CompleteStep(workOrderDto);
@@ -133,7 +142,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("cancel-step")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> CancelStep(WorkOrderDto workOrderDto)
         {
             var result = await workOrderService.CancelStep(workOrderDto);
@@ -149,7 +158,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("finish-work-order")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> FinishWorkOrder(WorkOrderDto workOrderDto)
         {
             var result = await workOrderService.FinishWorkOrder(workOrderDto);
@@ -166,7 +175,7 @@ namespace lanternagem_api.Controllers
 
 
         [HttpPost("cancel-work-order")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> CancelWorkOrder(WorkOrderDto workOrderDto)
         {
             var result = await workOrderService.CancelWorkOrder(workOrderDto);
@@ -182,7 +191,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPut("update-work-order")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> UpdateWorkOrder(UpdateWorkOrderDto updateWorkOrderDto)
         {
             var result = await workOrderService.UpdateWorkOrder(updateWorkOrderDto);

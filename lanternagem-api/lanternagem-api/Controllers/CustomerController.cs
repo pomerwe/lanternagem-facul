@@ -21,7 +21,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-customer-by-id/{customerId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> GetCustomerById(long customerId)
         {
             var result = await customerProvider.GetCustomerById(customerId);
@@ -37,7 +37,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-customers-by-branch/{insuranceBranchId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> GetCustomers(int insuranceBranchId)
         {
             var result = await customerProvider.GetCustomersByBranch(insuranceBranchId);
@@ -53,7 +53,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPut("update-costumer")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager,Customer")]
         public async Task<IActionResult> UpdateCostumer([FromBody] Customer customer)
         {
             var result = await customerProvider.UpdateCostumer(customer);
@@ -69,7 +69,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpDelete("delete-customer/{customerId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteCustomer(long customerId)
         {
             var result = await customerProvider.DeleteCostumerUsingId(customerId);

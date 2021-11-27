@@ -17,7 +17,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost("add-service")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> AddService([FromBody] Service service)
         {
             var result = await serviceProvider.AddService(service);
@@ -33,7 +33,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-service-by-id/{serviceId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> GetServiceById(int serviceId)
         {
             var result = await serviceProvider.GetServiceById(serviceId);
@@ -49,7 +49,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpGet("get-services")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> GetServices()
         {
             var result = await serviceProvider.GetServices();
@@ -65,7 +65,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPut("update-service")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> UpdateService([FromBody] Service service)
         {
             var result = await serviceProvider.UpdateService(service);
@@ -81,7 +81,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpDelete("delete-service/{serviceId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteService(int serviceId)
         {
             var result = await serviceProvider.DeleteService(serviceId);

@@ -49,7 +49,7 @@ namespace lanternagem_api.Models
             if (vehicle == null)
                 throw new Exception("Error, vehicle is not set!");
 
-            if (Vehicles.Contains(vehicle))
+            if (Vehicles.Select(v => v.LicensePlate).ToList().Contains(vehicle.LicensePlate))
                 throw new Exception("This costumer already has this vehicle registered!");
 
             Vehicles.Add(vehicle);

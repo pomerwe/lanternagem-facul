@@ -69,6 +69,7 @@ namespace lanternagem_api.Providers
             {
                 WorkOrder workOrder = await dbContext.WorkOrders
                                               .Include(w => w.Customer)
+                                                .ThenInclude(c => c.User)
                                               .Include(w => w.Vehicle)
                                               .Include(w => w.Accident)
                                               .Include(w => w.Service)

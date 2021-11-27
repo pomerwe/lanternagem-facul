@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0cf1cc00-e223-46a8-b405-00d898e92722",
+		"_postman_id": "e77b0e16-1a5f-45cf-97fb-6a805715ac95",
 		"name": "InsuranceCompany",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -556,6 +556,42 @@
 								"api",
 								"insurance-processes",
 								"new-insured"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddVehicleToCustomer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjM3ODg4Mjc5LCJleHAiOjE2Mzc4OTU0NzksImlhdCI6MTYzNzg4ODI3OX0.HYOAmGtXyxRuY9kcUZCwkBw5IO0xQJ9nJyf4bCftv2M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 1,\r\n    \"name\": \"Dragão Alado\",\r\n    \"licensePlate\": \"A7J99K\",\r\n    \"model\": \"Lamborghini Gallardo\",\r\n    \"brand\": \"Lamborghini\",\r\n    \"color\": \"Vermelho\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1534/api/insurance-processes/add-vehicle-insured",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1534",
+							"path": [
+								"api",
+								"insurance-processes",
+								"add-vehicle-insured"
 							]
 						}
 					},

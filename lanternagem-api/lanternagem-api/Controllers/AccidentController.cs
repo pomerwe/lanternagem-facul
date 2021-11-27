@@ -11,21 +11,26 @@ namespace lanternagem_api.Controllers
     public class AccidentController : Controller
     {
         private readonly IAccidentProvider accidentProvider;
+        private const string ADD_ACCIDENT_URI = "add-accident";
+        private const string GET_ACCIDENT_BY_ID_URI = "add-accident";
+        private const string GET_ACCIDENTS = "add-accidents";
+        private const string UPDATE_ACCIDENT = "update-accident";
+        private const string DELETE_ACCIDENT = "delete-accident/{accidentId}";
 
         public AccidentController(IAccidentProvider accidentProvider)
         {
             this.accidentProvider = accidentProvider;
         }
 
-        [HttpPost("add-accident")]
-        [Authorize]
+        [HttpPost(ADD_ACCIDENT_URI)]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> AddAccident([FromBody] Accident accident)
         {
             var result = await accidentProvider.AddAccident(accident);
 
             if (result.IsSuccess)
             {
-                return Created("add-accident", result.Accident);
+                return Created(ADD_ACCIDENT_URI, result.Accident);
             }
             else
             {
@@ -33,9 +38,9 @@ namespace lanternagem_api.Controllers
             }
         }
 
-        [HttpGet("get-accident-by-id/{accidentId}")]
-        [Authorize]
-        public async Task<IActionResult> GetSAccidentById(int accidentId)
+        [HttpGet(GET_ACCIDENT_BY_ID_URI)]
+        [Authorize(Roles = "Admin,Manager")]
+        public async Task<IActionResult> GetAccidentById(int accidentId)
         {
             var result = await accidentProvider.GetAccidentById(accidentId);
 
@@ -49,8 +54,8 @@ namespace lanternagem_api.Controllers
             }
         }
 
-        [HttpGet("get-accidents")]
-        [Authorize]
+        [HttpGet(GET_ACCIDENTS)]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> GetAccidents()
         {
             var result = await accidentProvider.GetAccidents();
@@ -65,8 +70,8 @@ namespace lanternagem_api.Controllers
             }
         }
 
-        [HttpPut("update-accident")]
-        [Authorize]
+        [HttpPut(UPDATE_ACCIDENT)]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> UpdateAccident([FromBody] Accident accident)
         {
             var result = await accidentProvider.UpdateAccident(accident);
@@ -81,8 +86,8 @@ namespace lanternagem_api.Controllers
             }
         }
 
-        [HttpDelete("delete-accident/{accidentId}")]
-        [Authorize]
+        [HttpDelete(DELETE_ACCIDENT)]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteAccident(int accidentId)
         {
             var result = await accidentProvider.DeleteAccident(accidentId);

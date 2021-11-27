@@ -16,6 +16,7 @@ namespace lanternagem_api.Controllers
         private readonly IInsuranceService insuranceService;
         private const string NEW_INSURANCE_COMPANY_URI = "new-insurance-company";
         private const string NEW_INSURED_URI = "new-insured";
+        private const string ADD_VEHICLE_INSURED_URI = "add-vehicle-insured";
         private const string NEW_INSURANCE_BRANCH_URI = "new-insurance-branch";
 
         public InsuranceProcessesController(IInsuranceService insuranceService)
@@ -24,7 +25,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost(NEW_INSURANCE_COMPANY_URI)]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> NewInsuranceCompany(RegisterNewInsuranceCompanyDto dto)
         {
             var result = await insuranceService.RegisterNewInsuranceCompany(dto);
@@ -40,7 +41,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost(NEW_INSURANCE_BRANCH_URI)]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> NewInsuranceBranch(RegisterNewInsuranceBranchDto dto)
         {
             var result = await insuranceService.RegisterNewInsuranceBranch(dto);
@@ -56,7 +57,7 @@ namespace lanternagem_api.Controllers
         }
 
         [HttpPost(NEW_INSURED_URI)]
-        [Authorize]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> NewInsuranceCompany(RegisterNewInsuredDto dto)
         {
             var result = await insuranceService.RegisterNewInsured(dto);
@@ -64,6 +65,28 @@ namespace lanternagem_api.Controllers
             if (result.IsSuccess)
             {
                 return Created(NEW_INSURED_URI, result.CreatedCustomer);
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
+        [HttpPost(ADD_VEHICLE_INSURED_URI)]
+        [Authorize(Roles = "Admin,Manager")]
+        public async Task<IActionResult> AddVehicleToInsured(AddVehicleToInsuredDto dto)
+        {
+            var result = await insuranceService.AddVehicleToInsured(dto);
+
+            if (result.IsSuccess)
+            {
+                var payload = new
+                {
+                    customerId = dto.CustomerId,
+                    vehicle = result.AddedVehicle
+                };
+
+                return Created(ADD_VEHICLE_INSURED_URI, payload);
             }
             else
             {

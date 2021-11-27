@@ -21,7 +21,7 @@ namespace lanternagem_api.Providers
             this.logger = logger;
         }
 
-        public async Task<(bool IsSuccess, Customer customer, string ErrorMessage)> AddCostumer(Customer customer)
+        public async Task<(bool IsSuccess, Customer Customer, string ErrorMessage)> AddCostumer(Customer customer)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace lanternagem_api.Providers
             }
         }
 
-        public async Task<(bool IsSuccess, Customer customer, string ErrorMessage)> UpdateCostumer(Customer customer)
+        public async Task<(bool IsSuccess, Customer Customer, string ErrorMessage)> UpdateCostumer(Customer customer)
         {
             try
             {

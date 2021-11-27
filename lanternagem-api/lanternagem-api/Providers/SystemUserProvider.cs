@@ -28,7 +28,8 @@ namespace lanternagem_api.Providers
             var admin = new SystemUser()
             {
                 Username = "admin",
-                Password = "admin"
+                Password = "admin",
+                Role = Role.Admin
             };
 
             this.dbContext.Users.Add(admin);

@@ -8,7 +8,7 @@ namespace lanternagem_api.DataTransferObjects
 {
     public class AuthenticatedDto
     {
-        public SystemUser User { get; set; }
+        public string User { get; set; }
         public string Token { get; set; }
     }
 }

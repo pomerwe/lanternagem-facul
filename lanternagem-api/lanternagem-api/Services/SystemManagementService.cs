@@ -115,7 +115,7 @@ namespace lanternagem_api.Services
                     var authenticatedDto = new AuthenticatedDto()
                     {
                         Token = token,
-                        User = user
+                        User = user.Username
                     };
 
                     return (true, authenticatedDto, null);
